@@ -119,10 +119,13 @@ if __name__ == '__main__':
 
     models_path = config['Network']['models_path']
     predict_save = config['Predict']['predict_save']
+    predict_to = config['Predict']['to_predict']
 
-    Folds = get_fold_dataset_dict(folds_number)
+    Folds = get_fold_dataset_dict(5, path='./Training_data/org/')
     for fold in folds:
+        fold = fold.strip()
         for net in models:
+            net = net.strip()
             model_path = f'{models_path}{net}/model_{fold}.json'
             model_weights = f'{models_path}{net}/model_weights_{fold}.h5'
             model = model_from_json(open(model_path).read())
@@ -130,5 +133,8 @@ if __name__ == '__main__':
 
             for impath in Folds[fold]['Test']:
                 imname = os.path.split(impath)[-1]
+                path_to_save = f'{predict_save}{fold}/{net}/{imname}'
+                os.makedirs(os.path.split(path_to_save)[0], exist_ok=True)
+
                 pred = predict_img(impath, model, patch_height, patch_width, stride_height, stride_width, batch_size)
-                io.imsave(f'{predict_save}{fold}/{net}/{imname}', pred)
+                io.imsave(path_to_save, pred)

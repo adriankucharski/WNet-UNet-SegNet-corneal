@@ -7,7 +7,10 @@ import pickle
 from tensorflow.keras.callbacks import ModelCheckpoint
 from models import WNet, UNet, SegNet
 from others import load_dataset, SysPath, dump_history, load_pickle_dataset
+
 import models
+from importlib import reload
+reload(models)
 
 if __name__ == '__main__':
     config = configparser.ConfigParser()
@@ -16,17 +19,17 @@ if __name__ == '__main__':
     folds = config['Data']['fold'].split(',')
     patch_size = int(config['Data']['patch_size_x']), int(config['Data']['patch_size_y'])
 
-    models = config['Training']['network'].split(',')
+    model_names = config['Training']['network'].split(',')
     batch_size = int(config['Training']['batch_size'])
     N_epochs = int(config['Training']['N_epochs'])
     val_split = float(config['Training']['val_split'])
     
+    models_func = [(name.strip(), getattr(models, name.strip())((*patch_size, 1))) for name in model_names]
 
-    models = [[name, getattr(models, name)((*patch_size, 1))] for name in models]
-
-    for model_name, model in models:
+    for model_name, model in models_func:
         for fold in folds:
-            Path_dataset = SysPath(config['Data']['path_dataset']) + '/' + fold + '.pickle'
+            fold = fold.strip()
+            Path_dataset = f'{SysPath(config["Data"]["path_dataset"])}/{fold}.pickle'
     
             X, Y = load_pickle_dataset(Path_dataset)
             print(model_name, X.shape, Y.shape)
@@ -35,6 +38,7 @@ if __name__ == '__main__':
             model_path_save = f'./Trained_model/{model_name}/model_{fold}.json'
             model_best_weight_save = f'./Trained_model/{model_name}/model_weights_{fold}.h5'
 
+            os.makedirs(f'./Trained_model/{model_name}/', exist_ok=True)
             open(model_path_save, 'w').write(model.to_json())
             checkpointer = ModelCheckpoint(model_best_weight_save, verbose=2, monitor='val_loss', mode='auto', save_best_only=True)
 

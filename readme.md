@@ -62,6 +62,14 @@ main_dir
 └── training.py
 </code></pre>
 
+## How to use
+<ol>
+<li>Config the config.ini file</li>
+<li>Run prepare_dataset.py</li>
+<li>Run training.py</li>
+<li>Run predict.py</li>
+</ol>
+
 ## Content
 <ul>
 <li> <b>config.ini</b> main configuration file </li>

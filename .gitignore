@@ -6,3 +6,4 @@ test.py
 /Predicted_images/
 /Complete_1/
 prepare_data.py
+*.pickle
