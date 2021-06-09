@@ -121,7 +121,7 @@ if __name__ == '__main__':
     predict_save = config['Predict']['predict_save']
     predict_to = config['Predict']['to_predict']
 
-    Folds = get_fold_dataset_dict(5, path='./Training_data/org/')
+    Folds = get_fold_dataset_dict(folds_number, path='./Training_data/org/')
     for fold in folds:
         fold = fold.strip()
         for net in models:
