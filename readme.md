@@ -48,7 +48,6 @@ main_dir
 │   └── WNet              
 ├── Training_data
 │   ├── gt                  # put ground truth images here
-│   ├── hdf5                # contains training dataset, run prepare_dataset.py
 │   ├── org                 # put original images here
 │   ├── field               # put region of interest images here
 │   └── test                # images to predict, run predict.py
