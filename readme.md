@@ -47,10 +47,11 @@ main_dir
 │   └── SegNet                
 │   └── WNet              
 ├── Training_data
+│   ├── markers             # markers generated from images from ./gt_all/ images
+│   ├── gt_all              # ground truth images from http://bioimlab.dei.unipd.it/Endo%20Aliza%20Data%20Set.htm
 │   ├── gt                  # put ground truth images here
 │   ├── org                 # put original images here
-│   ├── field               # put region of interest images here
-│   └── test                # images to predict, run predict.py
+│   └── field               # put region of interest images here
 ├── config.ini
 ├── history_show.py
 ├── models.py
@@ -62,6 +63,8 @@ main_dir
 </code></pre>
 
 ## How to use
+Framework is designed to train and predict images with cross_validation setup. Default numbers of folds is 5 (80% train, 20% predict).
+
 <ol>
 <li>Config the config.ini file</li>
 <li>Run prepare_dataset.py</li>
