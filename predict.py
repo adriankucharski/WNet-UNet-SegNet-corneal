@@ -3,8 +3,7 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 import numpy as np
 from skimage import io
-from glob import glob
-from others import SysPath, imstand
+from others import imstand
 from tensorflow.keras.models import model_from_json
 from prepare_dataset import get_fold_dataset_dict
 
@@ -109,7 +108,6 @@ if __name__ == '__main__':
     stride_height = int(config['Predict']['stride_height'])
 
     models = config['Training']['network'].split(',')
-    folds = config['Data']['fold'].split(',')
     folds_number = int(config['Data']['folds_number'])
 
     path_dataset = config['Data']['path_dataset']
@@ -122,8 +120,8 @@ if __name__ == '__main__':
     predict_to = config['Predict']['to_predict']
 
     Folds = get_fold_dataset_dict(folds_number, path='./Training_data/org/')
-    for fold in folds:
-        fold = fold.strip()
+    for fold_id in range(folds_number):
+        fold = f'Fold_{fold_id}'
         for net in models:
             net = net.strip()
             model_path = f'{models_path}{net}/model_{fold}.json'

@@ -1,9 +1,11 @@
+import os
+import pathlib
+import pickle
+
+import h5py
 import numpy as np
 from numpy.random import RandomState
-import pickle
-import h5py
-import pathlib
-import os
+
 
 #-------------------------------------------------------#
 #----------------------SYSTEM---------------------------#

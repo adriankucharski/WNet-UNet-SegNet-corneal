@@ -1,12 +1,14 @@
 
-from glob import glob
-import numpy as np
-from others import imstand, SysPath, write_hdf5, save_pickle_dataset, mask_reshape, shuffle_dataset
-from skimage import io
-from random import randint
 import configparser
 import re
+from glob import glob
 from pathlib import Path
+from random import randint
+
+import numpy as np
+from skimage import io
+
+from others import imstand, save_pickle_dataset, mask_reshape, shuffle_dataset
 
 
 def extract_rand_field_list(orglist:list, patch_per_im=200, patch_width=32, patch_height=32, gt='gt', field='field', org='org'):
@@ -105,6 +107,8 @@ def extract_rand_field(org_path, gt_path, roi_path, patch_per_im=200, patch_widt
 
 
 def get_fold_dataset_dict(folds=5, path='./Data/Full/org'):
+    assert folds >= 1
+
     Alizarine = []
     Gavet = []
     Hard = []
@@ -133,6 +137,10 @@ def get_fold_dataset_dict(folds=5, path='./Data/Full/org'):
                     testIndex += folds
                 else:
                     Folds[f'Fold_{k}']['Train'].append(dataset[i])
+    # Folds is 1 use whole dataset to train
+    if folds == 1:
+        Folds['Fold_0']['Test'], Folds['Fold_0']['Train'] = Folds['Fold_0']['Train'], Folds['Fold_0']['Test']
+
     return Folds
 
 #--------------------------------------------------------------------------------------#

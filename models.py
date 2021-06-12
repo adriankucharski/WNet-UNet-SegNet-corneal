@@ -1,10 +1,9 @@
+import tensorflow.keras.backend as K
 from tensorflow.keras.layers import (Activation, BatchNormalization, Conv2D,
                                      Dropout, Input, MaxPooling2D,
                                      UpSampling2D, concatenate)
-from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.models import Model
-import tensorflow.keras.backend as K
-import tensorflow as tf
+
 
 def dice_coef(y_true, y_pred):
     smooth = 1e-6

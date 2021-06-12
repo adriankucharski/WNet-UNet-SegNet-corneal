@@ -1,8 +1,10 @@
-import pickle
 import configparser
+import pickle
+
 import matplotlib.pyplot as plt
-import numpy as np
+
 from others import SysPath
+
 
 def create_plot(history, save_plot = True):
     try:

@@ -7,3 +7,4 @@ test.py
 /Complete_1/
 prepare_data.py
 *.pickle
+/predicted/

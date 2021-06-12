@@ -3,9 +3,9 @@ import scipy
 from skimage import io, measure, morphology
 from skimage.filters import rank, roberts, threshold_li
 from skimage.measure import label
-from skimage.morphology import erosion, closing, dilation, skeletonize
+from skimage.morphology import erosion, closing, skeletonize
 from skimage.segmentation import watershed
-from skimage.transform import resize
+
 
 ################################################################################
 def pruning(im, outline_val = 1.0):
