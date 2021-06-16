@@ -74,7 +74,7 @@ Framework is designed to train and predict images with cross_validation setup. D
 </ol>
 
 ## Predict from path
-To predict from a different path you can setup <i>predict_from_path.py</i> script. For example, you can set up <b>folds_number</b> to 1 in <b>config.ini</b> to generate training data from a whole dataset (from <i>/Training_data/</i>), then you run <i>prepare_dataset.py</i> and <i>training.py</i> to train networks on new data. What you get is a trained networks that you can use in <i>predict_from_path.py</i>. Trained models should be in the <i>/Trained_model/network_name/</i> path.
+To predict from a different path you can setup <i>predict_from_path.py</i> script. For example, you can set up <b>folds_number</b> to 1 in <b>config.ini</b> to generate training data from a whole dataset (from <i>/Training_data/</i>), then you run <i>prepare_dataset.py</i> and <i>training.py</i> to train networks on new data. What you get are trained networks that you can use in <i>predict_from_path.py</i>. Trained models should be in the <i>/Trained_model/network_name/</i> path.
 
 ## Content
 <ul>
